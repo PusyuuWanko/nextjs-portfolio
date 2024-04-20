@@ -37,68 +37,11 @@ export default function navListLogic() {
 }
 
 export function getPageContentLogic(id: string) {
-/*htmlが生で表示される
-  //const [markdown, setMarkdown] = useState("");
+/*htmlが生で表示される*/
+  const [markdown, setMarkdown] = useState("");
 
   let nav = navListLogic();
-  let markdown = "";
 
-  for (const obj of nav) {
-    const [key] = Object.keys(obj);
-    //console.log(key);
-    if (id === key) {
-    console.log(id);
-      const response = fetch(`./components/mainPageMd/${key}.md`).then((response) => {
-        if (response.ok) {
-          markdown = response.text();
-        } else {
-          throw new Error("Page not found.");
-        }
-      }).then((md)=> {
-        markdown = md;
-        renderMarkdown();
-      }).catch((error)=> {
-        console.error(error);
-        markdown = "Page not found.";
-        renderMarkdown();
-      });
-      return null;
-    }
-  }
-  
-  let renderMarkdown = ()=>{
-    return <ReactMarkdown>{markdown}</ReactMarkdown>;
-  }*/
-  
-let nav = navListLogic();
-let markdown = "";
-
-for (const obj of nav) {
-  const [key] = Object.keys(obj);
-  if (id === key) {
-    console.log(id);
-    const response = fetch(`/mainPageMd/${key}.md`)
-      .then((response) => {
-        if (response.ok) {
-          return response.text();
-        } else {
-          throw new Error("Page not found.");
-        }
-      })
-      .then((md) => {
-        markdown = md;
-        return <ReactMarkdown>{markdown}</ReactMarkdown>;
-      })
-      .catch((error) => {
-        console.error(error);
-        markdown = "Page not found.";
-        return <ReactMarkdown>{markdown}</ReactMarkdown>;
-      });
-    return null;
-  }
-}
-
-/*
   if (id === 'home') {
     return <ReactMarkdown>{homeMdFile}</ReactMarkdown>;
   } else if (id === 'img') {
@@ -146,5 +89,5 @@ for (const obj of nav) {
         </div>
       </>
     );
-  }*/
+  }
 }
